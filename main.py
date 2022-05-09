@@ -28,9 +28,10 @@ def get_raw_sentences():
         )
     content = request.json
     kw = content.get('keywords', [])
+    settings = content.get('settings', default_config_dict)
     print(kw)
     s = get_completions(
-        kw, tokenizer=tokenizer, model=model, **default_config_dict
+        kw, tokenizer=tokenizer, model=model, **settings
     )
     return Response(json.dumps(s), status=200, mimetype='application/json')
 
@@ -46,9 +47,10 @@ def get_sentences():
         )
     content = request.json
     kw = content.get('keywords', [])
+    settings = content.get('settings', default_config_dict)
     print(kw)
     samples = get_completions(
-        kw, tokenizer=tokenizer, model=model, **default_config_dict
+        kw, tokenizer=tokenizer, model=model, **settings
     )
     sentences = []
     for sample in samples:
@@ -60,6 +62,7 @@ def get_sentences():
     return Response(
         json.dumps(sentences), status=200, mimetype='application/json'
     )
+
 
 @app.route('/', methods=['GET'])
 @cross_origin()
