@@ -10,7 +10,7 @@ from flask import Flask, request, Response
 from model import default_config_dict, model, tokenizer, get_completions
 
 HOST = '0.0.0.0'
-PORT = '8000'
+PORT = '80'
 NAME = ''
 
 app = Flask('')
@@ -57,6 +57,11 @@ def get_sentences():
     return Response(
         json.dumps(sentences), status=200, mimetype='application/json'
     )
+
+@app.route('/', methods=['GET'])
+def index():
+    if request.args.get('6843f1fffdc2bf82a7dc08584717b008', None) is not None:
+        return Response(status=200)
 
 if __name__ == '__main__':
     app.run(host=HOST, port=PORT)
