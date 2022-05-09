@@ -1,5 +1,5 @@
 flask==2.1.2
-flas_cors==3.0.10
+flask_cors==3.0.10
 gdown==4.4.0
 matplotlib==3.5.1
 numpy==1.21.5
