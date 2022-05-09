@@ -7,6 +7,7 @@ Created on Sun May  8 23:20:43 2022
 import json
 import re
 from flask import Flask, request, Response
+from flask_cors import cross_origin
 from model import default_config_dict, model, tokenizer, get_completions
 
 HOST = '0.0.0.0'
@@ -16,6 +17,7 @@ NAME = ''
 app = Flask('')
 
 @app.route('/get_raw_sentences', methods=['POST'])
+@cross_origin()
 def get_raw_sentences():
     content_type = request.content_type
     if (content_type != 'application/json'):
@@ -33,6 +35,7 @@ def get_raw_sentences():
     return Response(json.dumps(s), status=200, mimetype='application/json')
 
 @app.route('/get_sentences', methods=['POST'])
+@cross_origin()
 def get_sentences():
     content_type = request.content_type
     if (content_type != 'application/json'):
@@ -59,6 +62,7 @@ def get_sentences():
     )
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def index():
     if request.args.get('6843f1fffdc2bf82a7dc08584717b008', None) is not None:
         return Response(status=200)
